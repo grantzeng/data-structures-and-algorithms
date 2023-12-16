@@ -1,4 +1,4 @@
-from linked_list import Linked_List
+from data_structures.linked_list_naive import Linked_List
 
 def run_linked_list_tests():
     numbers = [3, 4, 6, 788, 88, 8]
@@ -31,6 +31,20 @@ def run_linked_list_tests():
     for i in range(3):
         ll.delete_first()
     ll.display()
+
+    #
+    ll.delete_at(6)
+    ll.delete_at(5)
+    ll.delete_at(0)
+    ll.display()
+
+    for i in range(4, -1, -1):
+        ll.delete_at(i)
+        ll.display()
+
+    ll.delete_first()
+    ll.delete_first()
+    ll.delete_first()
 
 
 if __name__ == '__main__':
