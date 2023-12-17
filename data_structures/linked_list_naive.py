@@ -3,15 +3,14 @@
 """
     C-style implementation of a linked list
     - Purely if/for/while/else type structured constructs
+
+    TODO:
+    - Check if there's out of bounds errors here...I feel like there might be
 """
 class Linked_List_Node: 
     def __init__(self, data):
         self.item = data
         self.next = None
-
-    # def later_node(self, i):
-    #   Sample code exploits recursive calling to make code nicer than looping
-    #   Implement with looping first because that's how I'd do it in C.
 
 class Linked_List:
     def __init__(self):
