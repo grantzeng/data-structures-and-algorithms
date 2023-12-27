@@ -13,9 +13,9 @@
 #include <stdio.h>
 
 typedef struct {
-    int *arr;
-    int  numI;
-    int  numS;
+    int *arr;   // Pointer to a static array
+    int  len;   // Number of items in array/array usage
+    int  cap;   // Total allocated memory size/max size of curr static array
 
 } DA;
 
@@ -33,10 +33,10 @@ DA *createDA() {
 
     d->arr = (int *)calloc(1, sizeof(int));
     assert(d->arr[0] == 0);
-    /* TODO: Explanation of why *(arr->arr)[0] is...wrong*/
+    /* TODO: Explanation of why *(d->arr)[0] is...wrong*/
 
-    d->numI = 0;
-    d->numS = 1;
+    d->len = 0;
+    d->cap = 1;
 
     return d;
 }
@@ -47,16 +47,16 @@ void freeDA(DA *d) {
 }
 
 void displayDA(DA *d) {
-    printf("Occupied size: %d\n", d->numI);
+    printf("Occupied size: %d\n", d->len);
     printf("[ ");
-    for (int i = 0; i < d->numI; i++) {
+    for (int i = 0; i < d->len; i++) {
         printf("%d", d->arr[i]);
-        if (i < d->numI - 1) {
+        if (i < d->len - 1) {
             printf(", ");
         }
     }
     printf(" ]\n");
-    printf("Allocated size: %d\n", d->numS);
+    printf("Allocated size: %d\n", d->cap);
 }
 
 
@@ -64,7 +64,7 @@ void displayDA(DA *d) {
 
     ARRAY RESIZING POLICY
 
-    > "Cookies are a _sometimes_ food, according to modern Cookie Monster" - Lec 2
+    "Cookies are a _sometimes_ food...according to modern Cookie Monster" - Lec 2
 
     Idea:
     - Make it s.t. if we do n inserts, it should cost us at most O(n) time, i.e.
@@ -76,8 +76,8 @@ void displayDA(DA *d) {
       we want to _deallocate_ extra space. But we also want to do this in amortized O(1).
 
     Resizing policy:
-    - if numI same as size, trigger table doubling.
-    - if numI < half of size, trigger table halving.
+    - if items same as size, trigger table doubling.
+    - if items < half of size, trigger table halving.
 
     Proof results in amortized O(1) insert_last:
     - Suppose we insert_last n items 1, 2, 3, ..., n
@@ -89,17 +89,20 @@ void displayDA(DA *d) {
     - but this is just O(.) of the highest term which is roughly 2^{\log(n)} so total cost is O(n)
 
     - voila, O(1) amortized across all n inserts
+*/
 
-    TODO: Figure out how to implement resize policy
+/*
+    TO DOS:
+    - Implement table doubling when req'd size > curr alloc
+
 */
 void _resize(DA *d, int size) {
 
-    /*
-    if (size > d->size) {
 
+    if (size > d->len) {
 
-    } elif
-    */
+    }
+
 
 }
 
@@ -113,17 +116,17 @@ void _copy_backwards(DA *d, int i) {
 
 
 void insert_last(DA *d, int val) {
-    int k = d->numI + 1;
+    int k = d->len + 1;
     _resize(d, k);
     d->arr[k] = val;
-    d->numI += 1;
+    d->len += 1;
 }
 
 int delete_last(DA *d) {
-    int last = d->arr[d->numI - 1];
-    d->arr[d->numI - 1] = -1;
-    d->numI -= 1;
-    _resize(d, d->numI);
+    int last = d->arr[d->len - 1];
+    d->arr[d->len - 1] = -1;
+    d->len -= 1;
+    _resize(d, d->len);
     return last;
 }
 
@@ -140,8 +143,8 @@ int main()  {
 
     /* Check init correctly */
 
-    /* Check numS doubling works*/
+    /* Check allocated doubling works*/
 
-    /* Check numS halving works */
+    /* Check allocated halving works */
     return 0;
 }
