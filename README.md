@@ -16,11 +16,22 @@ Interfaces
 - set interface (dict)
 
 Data structures
-- static array -> dynamic array -> sorted dynamic array
+- arrays
+    - static array (skip)
+    - ~~**dynamic array**~~ (DONE 2023-12-28)
+    - sorted dynamic array
 - linked list
-- direct-access array -> hash table
-- binary tree -> balanced binary tree
-- binary heap
+    - **singly linked list**
+    - doubly linked list
+- hash tables
+    - direct-access array
+    - **hash table**
+- trees
+    - binary tree
+    - **balanced binary tree**
+- heaps
+    - **binary heap**
+
 > Point here is that: stack/queues etc. are really just interfaces on some of these structures "in memory"; so this seems like the minimal set I should implement
 
 > Implement them in Python, then think about testing (on a separate day) from mindset of trying to break your implementation. Then implement them in C...with tests.
