@@ -4,8 +4,7 @@
     Written for revising practical aspects of COMP2521.
 
     TODO:
-    - Write tests. Turns out most of the issues were to do with keeping track of array bounds.
-
+    - Think about testing (many array bounds type issues)
 */
 
 #include <stdlib.h>
@@ -59,7 +58,7 @@ void freeDA(DA *d) {
 
 /*
 
-    Static array management helpers
+    More memory management
 
 */
 void _resize(DA *d, int size) {
@@ -106,8 +105,22 @@ void _copy_backwards(DA *d, int idx) {
 
 /*
 
-    Data structure operations
-    - Offers a sequence interface, basically
+    Static operations
+
+*/
+
+int get_at(DA *d, int idx) {
+    ;
+}
+
+void set_at(DA *d, int idx, int val) {
+    ;
+}
+
+
+/*
+
+     Dynamic operations
 
 */
 void insert_at(DA *d, int val, int idx) {
