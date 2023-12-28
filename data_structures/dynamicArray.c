@@ -4,11 +4,7 @@
     Written for revising practical aspects of COMP2521.
 
     TODO:
-    - Think about test cases/write some shell script to run it against the Python implementations
-
-
-    TODO:
-    - Exericse: debug this with gdb instead of print debugging
+    - Write tests. Turns out most of the issues were to do with keeping track of array bounds.
 
 */
 
@@ -46,19 +42,12 @@ void displayDA(DA *d) {
 
 DA *createDA() {
 
-    /* TODO: Add ability to init with a static array */
-
     DA *d = malloc(sizeof(DA));
     assert(d != NULL);
 
     d->arr = (int *)malloc(sizeof(int));
-    assert(d->arr[0] == 0);
-    /* TODO: Explanation of why *(d->arr)[0] is...wrong*/
-
     d->len = 0;
     d->cap = 1;
-
-    displayDA(d);
 
     return d;
 }
@@ -69,78 +58,60 @@ void freeDA(DA *d) {
 }
 
 
-
 /*
 
-    ARRAY RESIZING POLICY
+    Static array management helpers
 
-    "Cookies are a _sometimes_ food...according to modern Cookie Monster" - Lec 2
-
-    Idea:
-    - Make it s.t. if we do n inserts, it should cost us at most O(n) time, i.e.
-      amortized O(1) versus the original policy with the dumb array where we do +1
-      each time (so 1 insert costs O(n) time because of all the copying, which is
-      the expensive operation we want to make rare)
-
-    - If we're not really _using_ the allocated memory e.g. popped a lot of elements,
-      we want to _deallocate_ extra space. But we also want to do this in amortized O(1).
-
-    Resizing policy:
-    - if items same as size, trigger table doubling.
-    - if items < half of size, trigger table halving.
-
-    Proof results in amortized O(1) insert_last:
-    - Suppose we insert_last n items 1, 2, 3, ..., n
-
-    - With table doubling policy, we pay O(n) resize cost (allocation and copying)
-      every 1, 2, 4, ..., k=(nearest power of 2 less than n) which is just a geometric
-      series \sum_{log k}{i=0} 2^i = 2^{k+1} - 1
-
-    - but this is just O(.) of the highest term which is roughly 2^{\log(n)} so total cost is O(n)
-
-    - voila, O(1) amortized across all n inserts
-*/
-
-/*
-    TO DOS:
-    - Implement table doubling when req'd size > curr alloc
-        - table doubling works but seems like insert is screwed up
-        - (Exercise: can you use a debugger to fix this instead of inspecting output. Since that was part of the point of trying implement all these things in C)
-
-    - Implement table halving
-
-    Debugging
 */
 void _resize(DA *d, int size) {
 
+    int cap = d->cap;
+
     if (size > d->cap) {
-
-        int cap = SCALE_FACTOR * d->cap;
-
-        int *new = (int *)malloc(cap * sizeof(int));
-        for (int i = 0; i < d->len; i++) {
-            new[i] = d->arr[i];
-        }
-
-        free(d->arr);
-
-        d->arr = new;
-        d->cap = cap;
-        displayDA(d);
+        // Double array
+        cap = d->cap * SCALE_FACTOR;
+    }  else if (size < ( d->cap / SCALE_FACTOR ) ) {
+        // Halve array
+        cap = d->cap / SCALE_FACTOR;
+    } else {
+        // Enough capacity, do nothing
+        return;
     }
 
+    int *new = (int *)malloc(cap * sizeof(int));
+    for (int i = 0; i < d->len; i++) {
+        new[i] = d->arr[i];
+    }
 
+    free(d->arr);
+
+    d->arr = new;
+    d->cap = cap;
 }
 
-void _copy_forwards(DA *d, int i) {
-    ;
+void _copy_forwards(DA *d, int idx) {
+    int len = d->len + 1;
+    _resize(d, d->len + 1);
+
+    for (int i = len; i > idx; i--) {
+        d->arr[i] = d->arr[i - 1];
+    }
 }
 
-void _copy_backwards(DA *d, int i) {
-    ;
+
+void _copy_backwards(DA *d, int idx) {
+    for (int i = idx; i < d->len - 1; i++) {
+        d->arr[i] = d->arr[i + 1];
+    }
+    _resize(d, d->len - 1);
 }
 
+/*
 
+    Data structure operations
+    - Offers a sequence interface, basically
+
+*/
 void insert_last(DA *d, int val) {
     int len = d->len + 1;
     _resize(d, len);
@@ -156,31 +127,82 @@ int delete_last(DA *d) {
     return last;
 }
 
+void insert_at(DA *d, int val, int idx) {
+    assert(idx < d->len && idx >= 0);
+
+    _copy_forwards(d, idx);
+    d->arr[idx] = val;
+    d->len += 1;
+}
+
+
+
+int delete_at(DA *d, int idx) {
+    assert(idx < d->len && idx >= 0);
+
+    int val = d->arr[idx];
+    _copy_backwards(d, idx);
+    d->len -= 1;
+    return val;
+}
+
 
 /*
     Simple print debugging "tests"
 */
 
 int main()  {
-    /* Check creates empty array*/
-    // DA *d = createDA();
-    // displayDA(d);
-    // freeDA(d);
-
-    /*
-        Check resizing works
-        - Table doubling seems to work
-        - But insertion/copying elements over seems to be screwed up?
-    */
+    // Check initialisation works
     DA *d = createDA();
-    for (int i = 0; i < 100; i++) {
-        insert_last(d, i);
-    }
     displayDA(d);
     freeDA(d);
 
-    /* Check allocated doubling works*/
+    // Check resizing works
+    d = createDA();
+    for (int i = 0; i < 100; i++) {
+        insert_last(d, i);
+    }
 
-    /* Check allocated halving works */
+    for (int i = 0; i < 100; i++) {
+        delete_last(d);
+    }
+
+    for (int i = 0; i < 100; i++) {
+        insert_last(d, i);
+    }
+
+    for (int i = 0; i < 100; i++) {
+        delete_last(d);
+    }
+
+    displayDA(d);
+    freeDA(d);
+
+
+    // Check insert/delete at an index works
+    d = createDA();
+
+    for (int i = 0; i < 4; i++) {
+        insert_last(d, i);
+    }
+    displayDA(d);
+    delete_at(d, 3);
+    displayDA(d);
+    delete_at(d, 2);
+    displayDA(d);
+    insert_at(d, 9999, 0);
+    displayDA(d);
+    insert_at(d, 9998, 0);
+    displayDA(d);
+    delete_at(d, 0);
+    displayDA(d);
+    delete_at(d, 0);
+    displayDA(d);
+    delete_at(d, 0);
+    displayDA(d);
+    delete_at(d, 0);
+    displayDA(d);
+
+
     return 0;
 }
