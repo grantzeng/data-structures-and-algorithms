@@ -39,7 +39,6 @@ void displayDA(DA *d) {
     printf("Allocated size: %d\n\n", d->cap);
 }
 
-
 DA *createDA() {
 
     DA *d = malloc(sizeof(DA));
@@ -98,7 +97,6 @@ void _copy_forwards(DA *d, int idx) {
     }
 }
 
-
 void _copy_backwards(DA *d, int idx) {
     for (int i = idx; i < d->len - 1; i++) {
         d->arr[i] = d->arr[i + 1];
@@ -135,8 +133,6 @@ void insert_at(DA *d, int val, int idx) {
     d->len += 1;
 }
 
-
-
 int delete_at(DA *d, int idx) {
     assert(idx < d->len && idx >= 0);
 
@@ -145,7 +141,6 @@ int delete_at(DA *d, int idx) {
     d->len -= 1;
     return val;
 }
-
 
 /*
     Simple print debugging "tests"
@@ -178,7 +173,6 @@ int main()  {
     displayDA(d);
     freeDA(d);
 
-
     // Check insert/delete at an index works
     d = createDA();
 
@@ -202,7 +196,6 @@ int main()  {
     displayDA(d);
     delete_at(d, 0);
     displayDA(d);
-
 
     return 0;
 }
