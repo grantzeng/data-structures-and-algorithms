@@ -6,11 +6,17 @@
     TODO:
     - Think about test cases/write some shell script to run it against the Python implementations
 
+
+    TODO:
+    - Exericse: debug this with gdb instead of print debugging
+
 */
 
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
+
+#define SCALE_FACTOR 2
 
 typedef struct {
     int *arr;   // Pointer to a static array
@@ -24,6 +30,20 @@ typedef struct {
     Helper functions for memory management
 
 */
+void displayDA(DA *d) {
+    printf("\nOccupied size: %d\n", d->len);
+    printf("[ ");
+    for (int i = 0; i < d->len; i++) {
+        printf("%d ", d->arr[i]);
+    }
+    for (int i = d->len; i < d->cap; i++) {
+        printf("X ");
+    }
+    printf("]\n");
+    printf("Allocated size: %d\n\n", d->cap);
+}
+
+
 DA *createDA() {
 
     /* TODO: Add ability to init with a static array */
@@ -31,12 +51,14 @@ DA *createDA() {
     DA *d = malloc(sizeof(DA));
     assert(d != NULL);
 
-    d->arr = (int *)calloc(1, sizeof(int));
+    d->arr = (int *)malloc(sizeof(int));
     assert(d->arr[0] == 0);
     /* TODO: Explanation of why *(d->arr)[0] is...wrong*/
 
     d->len = 0;
     d->cap = 1;
+
+    displayDA(d);
 
     return d;
 }
@@ -46,18 +68,6 @@ void freeDA(DA *d) {
     free(d);
 }
 
-void displayDA(DA *d) {
-    printf("Occupied size: %d\n", d->len);
-    printf("[ ");
-    for (int i = 0; i < d->len; i++) {
-        printf("%d", d->arr[i]);
-        if (i < d->len - 1) {
-            printf(", ");
-        }
-    }
-    printf(" ]\n");
-    printf("Allocated size: %d\n", d->cap);
-}
 
 
 /*
@@ -94,13 +104,29 @@ void displayDA(DA *d) {
 /*
     TO DOS:
     - Implement table doubling when req'd size > curr alloc
+        - table doubling works but seems like insert is screwed up
+        - (Exercise: can you use a debugger to fix this instead of inspecting output. Since that was part of the point of trying implement all these things in C)
 
+    - Implement table halving
+
+    Debugging
 */
 void _resize(DA *d, int size) {
 
+    if (size > d->cap) {
 
-    if (size > d->len) {
+        int cap = SCALE_FACTOR * d->cap;
 
+        int *new = (int *)malloc(cap * sizeof(int));
+        for (int i = 0; i < d->len; i++) {
+            new[i] = d->arr[i];
+        }
+
+        free(d->arr);
+
+        d->arr = new;
+        d->cap = cap;
+        displayDA(d);
     }
 
 
@@ -116,9 +142,9 @@ void _copy_backwards(DA *d, int i) {
 
 
 void insert_last(DA *d, int val) {
-    int k = d->len + 1;
-    _resize(d, k);
-    d->arr[k] = val;
+    int len = d->len + 1;
+    _resize(d, len);
+    d->arr[len - 1] = val;
     d->len += 1;
 }
 
@@ -132,16 +158,26 @@ int delete_last(DA *d) {
 
 
 /*
-    Simple test debugging code
+    Simple print debugging "tests"
 */
 
 int main()  {
     /* Check creates empty array*/
+    // DA *d = createDA();
+    // displayDA(d);
+    // freeDA(d);
+
+    /*
+        Check resizing works
+        - Table doubling seems to work
+        - But insertion/copying elements over seems to be screwed up?
+    */
     DA *d = createDA();
+    for (int i = 0; i < 100; i++) {
+        insert_last(d, i);
+    }
     displayDA(d);
     freeDA(d);
-
-    /* Check init correctly */
 
     /* Check allocated doubling works*/
 
