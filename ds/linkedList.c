@@ -2,7 +2,8 @@
     Singly linked list C implementation of code in Recitation 2.
     - Implements sequence interface
 
-
+    TODO:
+    - This implementation is leaking memory and I haven't written tests for edge cases. Come back to do it later.
 
 
 */
@@ -164,7 +165,7 @@ int delete_at(LL *ll, int idx) {
     Node *targ = prev->next;
 
     int val = targ->data;
-    prev->next = targ->next->next;
+    prev->next = targ->next;
     free(targ);
     ll->size--;
     return val;
@@ -208,6 +209,25 @@ int main() {
 
     for (int i = 0; i <= 4; i++) {
         delete_at(ll, 1);
+        displayLL(ll);
+    }
+
+    freeLL(ll);
+
+    // Try insert_last and delete_last
+    ll = createLL();
+
+    for (int i = 0; i <= 5; i++) {
+        insert_first(ll, i);
+    }
+
+    displayLL(ll);
+    for (int i = 0; i <= 5; i++) {
+        if (i % 2) {
+            insert_last(ll, i);
+        } else {
+            delete_last(ll);
+        }
         displayLL(ll);
     }
 

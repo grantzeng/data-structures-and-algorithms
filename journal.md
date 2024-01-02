@@ -40,3 +40,6 @@ ARRAY RESIZING POLICY
 Just lots and lots of array index problems.
 
 Definitely: set aside the code for a bit and come back to look at it from a different perspective (e.g. safety, time complexity etc., add ability to init data structure give static array etc. But for now just focus on making sure you understand the algorithm)
+
+# 2024-01-02
+Implemented singly linked list. But it's leaking memory like crazy. Exercise: uset tools to debug.
