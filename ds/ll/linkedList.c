@@ -173,7 +173,8 @@ int delete_at(LL *ll, int idx) {
 }
 
 void insert_last(LL *ll, int val) {
-    insert_at(ll, ll->size - 1, val);
+    // insert_at(ll, ll->size - 1, val);
+    insert_at(ll, ll->size, val);
 }
 
 int delete_last(LL *ll) {
@@ -230,6 +231,8 @@ int main() {
         }
         displayLL(ll);
     }
+
+    free(ll);
 
 }
 
