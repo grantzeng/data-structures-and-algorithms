@@ -27,7 +27,7 @@ Data structures
     - direct-access array
     - **hash table**
 - trees
-    - binary tree
+    - **binary tree**
     - **balanced binary tree**
 - heaps
     - **binary heap**
