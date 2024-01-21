@@ -4,9 +4,10 @@
     interface)
     
     TODOS:
-    - Work through insertion
+    - ~~Work through insertion~~
     - Work through deletion
         - Easy solution: add overhead of parent pointers
+            - hard, refactor to add in parent pointer
         - Hard solution: do without parent pointers
 
     FUTURE:
@@ -18,7 +19,8 @@
 class BSTNode:
     def __init__(self, x): 
         self.val = x
-        self.left, self.right = None, None 
+        self.left, self.right = None, None
+        self.parent = None
 
     """
         Insert before/after current node, while maintaining traversal order
@@ -28,24 +30,35 @@ class BSTNode:
 
     """
     # These two sit a bit awkardly because there's other functions we'll want to implement that use them
-    def subtree_first(self): return self if not self.left else self.left.subtree_first()
-    def subtree_last(self): return self if not self.right else self.right.subtree_last()
+    def subtree_first(self):
+        return self if not self.left else self.left.subtree_first()
+
+    def subtree_last(self):
+        return self if not self.right else self.right.subtree_last()
 
     def subtree_insert_before(self, new):
-        if self.left:
-            self.left.subtree_last().right = new
+        if not self.left:
+            self.left, new.parent = new, self
             return
 
-        self.left = new
+        pred = self.left.subtree_last()
+        pred.right, new.parent = new, pred
+        return
+
 
     def subtree_insert_after(self, new):
-        if self.right:
-            self.right.subtree_first().left = new
+        if not self.right:
+            self.right, new.parent = new, succ
             return
 
-        self.right = new
+        succ = self.right.subtree_first()
+        succ.left, new.parent = new, succ
+
 
     """
-        Delete current while maintaining traversal ordr
+
+        Delete current while maintaining traversal order
+        - No parent pointer, so what do we do?
+
     """
 
