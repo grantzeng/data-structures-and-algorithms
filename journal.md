@@ -43,3 +43,10 @@ Definitely: set aside the code for a bit and come back to look at it from a diff
 
 # 2024-01-02
 Implemented singly linked list. But it's leaking memory like crazy. Exercise: uset tools to debug.
+
+
+# 2024-01-23 Tuesday
+
+Binary tree delete a node proving to be a bit tricky if you want do it by shuffling pointers around (I've spent 90 mins on this thing and I don't think it's 100% sunk in)
+- New algo seems to _preserve_ traversal order but can you _prove_ it does?
+- issue of deleting root
