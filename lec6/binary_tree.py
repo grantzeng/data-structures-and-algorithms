@@ -16,6 +16,14 @@
 
 """
 
+
+"""
+    This is a binary tree, but do preserve a linear/total ordering of elements
+    - we're not just inserting willy nilly
+
+"""
+
+
 class BinaryNode:
     def __init__(self, x): 
         self.val = x
@@ -158,7 +166,9 @@ class BinaryNode:
         #   - has only right subtree/only left subtree
         #   - has both left and right subtrees
         #
-        #   This involves actual pointer swaps
+        #   This involves actual pointer swaps\
+
+        # After a bit more reading, this is similar to the algorithm in CLRS, we'll have a look at it tonight
 
         if not self.left and not self.right:
             if self.parent:
@@ -197,7 +207,7 @@ class BinaryNode:
 
             # Strategy:
             #  1.  "t_1 < t_2", so find left most of t_2, and stick t_1 as its left subchild
-            least = self.subtree_first(self.right)
+            least = self.right.subtree_first()
             least.left = self.left
             self.left.parent = least
 
@@ -217,6 +227,3 @@ class BinaryNode:
             #   - but okay so long as the node you're deleting isn't root
 
         return self
-
-    def subtree_delete_recursive(self):
-        pass
