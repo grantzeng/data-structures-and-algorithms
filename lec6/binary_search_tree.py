@@ -82,6 +82,7 @@ class BSTree:
 
     def _transplant(self, u, v):
         # Replace subtree rooted at node u, with subtree rooted at node v
+        # only jiggles parent pointers, caller must make sure children don't get lost :|
         #   - Pre:  u is not None
 
         if not u.parent:            self.root = v
