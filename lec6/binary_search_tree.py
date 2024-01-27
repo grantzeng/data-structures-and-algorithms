@@ -11,6 +11,7 @@
 
     TODO:
     - Single letter variable names probably could be replaced
+    - Sanity check that you actually understand intuition of subtree delete
 """
 
 class BSTNode:
@@ -92,6 +93,8 @@ class BSTree:
 
     def delete(self, n):
         # Caller must give the reference to the node to be deleted
+        # - Intuition: want to replace node, with its successor (but without screwing up tree
+        #   invariant
 
         # Case 1: 0 children
         if not n.left and not n.right: n.parent = None
