@@ -18,7 +18,7 @@ Interfaces
 Data structures
 - arrays
     - static array (skip)
-    - ~~**dynamic array**~~ (DONE 2023-12-28)
+    - ~~**dynamic array**~~ (DONE 2023-12-28; revise resizing behaviour)
     - sorted dynamic array
 - linked list
     - **singly linked list**
