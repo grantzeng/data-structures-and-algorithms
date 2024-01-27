@@ -27,8 +27,7 @@ Data structures
     - direct-access array
     - **hash table**
 - trees
-    - **binary tree**
-    - **balanced binary tree**
+    - ~~**binary tree**/**balanced binary tree**~~ (DONE 2024-01-27; revise `subtree_delete()` to make sure you get it though)
 - heaps
     - **binary heap**
 
