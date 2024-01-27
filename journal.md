@@ -50,3 +50,8 @@ Implemented singly linked list. But it's leaking memory like crazy. Exercise: us
 Binary tree delete a node proving to be a bit tricky if you want do it by shuffling pointers around (I've spent 90 mins on this thing and I don't think it's 100% sunk in)
 - New algo seems to _preserve_ traversal order but can you _prove_ it does?
 - issue of deleting root
+
+# 2024-01-28 Sunday
+Still not sure about delete algorithm when you have two children. It's not _obviously_ correct in some ways.
+
+We're just going to move on to hashtables and come back to this later.
