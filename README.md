@@ -66,3 +66,15 @@ Performance (mostly time complexity, but also space complexity in passing )
 Correctness/proofs of correctness
 - also informal explanations of "why it works"
 
+
+# Change of plan 2024-01-28
+
+Implement all the data structures first
+
+Then implement all the algorithms
+
+It's not really 6.006 but there's bits and pieces of it
+
+Implement everything in Python first - because I'm trying to grok the algorithm's correctness (and time complexity, but mostly point of this exercise is that it should be obvious to me why a solution is/isn't correct)
+- then we'll reimplement everything in C so can I do stuff with memory
+

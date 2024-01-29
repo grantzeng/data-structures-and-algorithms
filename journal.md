@@ -55,3 +55,14 @@ Binary tree delete a node proving to be a bit tricky if you want do it by shuffl
 Still not sure about delete algorithm when you have two children. It's not _obviously_ correct in some ways.
 
 We're just going to move on to hashtables and come back to this later.
+
+
+# 2024-01-29 Monday
+Leetcode is down.
+
+This morning:
+- reimplemented bst delete
+- implemented a crude hashtable
+
+To do: take a break, then figureout how to use python debugger to debug my crappy hashtable.
+- Debugging wasn't too hard
