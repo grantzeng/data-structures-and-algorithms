@@ -4,8 +4,7 @@
     - collision resolution by chaining
     - (does not resize based on load)
     - (does not offer order operations)
-
-    Implicitly assumes values to be inserted are from a set, but does not check this
+    - (implicitly assumes values to be inserted are from a set, but does not check this)
 """
 
 
