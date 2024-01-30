@@ -60,3 +60,33 @@ optional extras:
 - make the table resize dynamically
 - implement a better hash function
 - order operations
+
+
+# Resizing policy
+> 2024-01-30
+
+Most of the discussion in CLRS + 6.006 centres on what makes a good hash function, than resizing policy.
+
+I think for argument's sake just implement it as table doubling + table halving. Then with a better hash function, we can avoid e.g. the isssue of e.g. inserting multiple of e.g. 10, landing all in the same slot that is capable of spreading elements out. modulo hash bad
+
+
+
+
+# Current solutions
+> Current use of a chain should really be a set interface on top of a linked list with testing, the current implementation is just something I hacked up on the spot
+
+Things to implement:
+- modulo hash, no resizing, chaining (done)
+- universal hash, table doubling, chaining (done, 2024-01-30)
+- universal hash, table doubling, linear probe
+- modulo hash, table doubling with rouding up to nearest prime, chaining (might not bother with this one)
+- modify the fill ratio and see how this affects performance
+
+Can we write some code to compare different implementations
+
+
+
+
+
+
+

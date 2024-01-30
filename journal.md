@@ -66,3 +66,9 @@ This morning:
 
 To do: take a break, then figureout how to use python debugger to debug my crappy hashtable.
 - Debugging wasn't too hard
+
+# 2024-01-30 Tuesday
+Prototyped hash table with resizing, universal hashing and
+- The point of having a large prime is to try to spread the elements out.
+
+Need to think about theoretical considerations when it came to design. The more you look into it, the more subtleties there actually are to consider
