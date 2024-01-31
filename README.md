@@ -1,5 +1,7 @@
 # data-structures-and-algorithms
 
+_Objective_: I should know about data structures and algorithms like I just know things about plants (and preferably before 2024 T3.)
+
 ### Current plan
 
 Data structures:
@@ -12,6 +14,7 @@ Data structures:
         - dynamic array
         - binary search tree
         - hash table
+        - _interlude_: sorting algorithms
         - self-balancing binary search trees
         - heap/priority queue
         - tries
@@ -19,9 +22,10 @@ Data structures:
 - Graph representations
 - (More exotic data structures that might turn up e.g. B-trees etc, but these are not priority)
 
+
 Algorithms:
 - Practical:
-    - start with sorting, CLRS Ch2
+    - start with sorting, CLRS Ch2 has a breakdown of how analysis/design of algorithms apparently happens
 - Theoretical:
     - revise Landau notation + solving recurrences
 

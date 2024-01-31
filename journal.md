@@ -3,13 +3,14 @@ Stubbed dynamic array in C.
 
 
 # 2023-12-28
+> "Cookies are a _sometimes_ food...according to modern Cookie Monster" - Lec 2, 6.006 Erik Demaine
+
 Trying to get myself to debug the dynamic array with gdb instead of by inspection.
 - Issue seems to happen with resizing, some problems with array bounds, especially when cap ends up at zero.
 
 ```
 ARRAY RESIZING POLICY
 
-    "Cookies are a _sometimes_ food...according to modern Cookie Monster" - Lec 2
 
     Idea:
     - Make it s.t. if we do n inserts, it should cost us at most O(n) time, i.e.
@@ -72,3 +73,14 @@ Prototyped hash table with resizing, universal hashing and
 - The point of having a large prime is to try to spread the elements out.
 
 Need to think about theoretical considerations when it came to design. The more you look into it, the more subtleties there actually are to consider
+
+
+# 2024-01-31 Wednesday
+I'm tired of doing trees, so I'm just going to move on to heaps and come back to self balancing binary trees later.
+
+PQ needed a better understanding of sorts, so moved on to implementing quadratic sorts
+
+Correctness of quadratic sorts
+- insertion, selection sort - correctness is clear because each round maintains `A[:i]` as a sorted prefix
+- bubblesort - not quite so clear why it's correct (Is is correct because each suffix `A[n-i-1:]` array is sorted? idea is we bubble max up to `A[n-i-1]`?)
+- Shellsort - give up for today, I can't recall why it worked.
