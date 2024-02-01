@@ -91,6 +91,22 @@ def shell_sort(A):
         - voila, it's sorted.
 
     """
+
+    """
+        OH, this is not a divide and conquer algorithm at all!
+        It's like using a sliding window of size h, and our objective is to swap the two elements at the end if they're out of place!
+        - https://www.youtube.com/watch?v=ddeLSDsYVp8 makes it visually obvious what it's doing
+
+        Does a lot of preprocessing to roughly put large elements on one end and small elements on the other
+        and then we run insertion sort at the end
+
+        It's basically insertion sort with some preprocessing to minimise large jumps
+
+        When h = 1 we get insertion sort
+
+        TODO: rewrite this to take various gap/h-sequences
+
+    """
     print('\n', '----Shell sort----')
 
     # Knuth proposed using h-size of 3^k + 1
@@ -114,19 +130,24 @@ def shell_sort(A):
 
     # Initialise gap size
     h = 1
-    while h < n /3:
+    while h < n / 3:
         h = h * 3 + 1
 
 
     while h: # for each gap size
 
-        for i in range(h, n):
-            #
-            #   Very confused here...
-            #
-            pass
+        for i in range(h, n): # Start "window" at h
+            tmp = A[i] # Save start of window which we may potentialyl ahve to swap
+            j = i
+            while j >= h and A[j - h] > tmp:
+                # Do a swap because end eleements out of order
+                A[j] = A[j - h]
 
-        h //= 3 # "Decrement" h according to Knuth sequence
+
+                # Decrement h to shift the h-window
+                j -= h
+
+        h //= 3 # go to next element in the h-sequence to be our gap
     return A
 
 
