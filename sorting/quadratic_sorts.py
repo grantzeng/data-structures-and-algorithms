@@ -27,6 +27,10 @@ def bubble_sort(A):
         - each pass will "bubble up" higher elements and "bubble down" smaller elements
 
         It's not formally apparent to me that this algorithm is _correct_ though?
+
+        EDIT: 2024-02-04
+        - it works because A[n-i-1:] is sorted after each iteration (suffixes are sorted, so just induct on that for correctness)
+          (I think)
     """
     print('\n', '----bubble sort----')
 

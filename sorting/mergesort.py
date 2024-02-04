@@ -3,6 +3,9 @@
         divide and conquer
 
     Writing it in vaguely C style way.
+
+    Exercise:
+        - make the sorting in place? currently we create a new list every time we merge two lists
 """
 
 def merge(A, B):

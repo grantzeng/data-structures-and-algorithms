@@ -25,3 +25,6 @@ Implement all of them today (2024-01-31) to convince yourself of correctness of 
 `bubble_sort`: What's going on with the inner loop being set as `range(n- i - 1)`? Why not just `range(n-1)`?
 
 Comeback analyse/prove correctness, time complexity and other tradeoffs to consider
+
+Merge sort - can we do an inplace implementation on an array?
+
