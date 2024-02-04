@@ -90,3 +90,18 @@ Correctness of quadratic sorts
 Implemented shell sort.
 - "preprocessing" with gap in a gap sequence
 - When gap = 1, we end up with insertion sort which we _know_ is correct.
+
+
+# 2024-02-04 Sun
+
+Implement (naive) mergesort (non-inplace - do this later)
+
+Implementing (naive) quicksort (pivot is "pick left element of subarray")
+- Trying to figure out partitioning
+- Some issues with indexing array elems
+- Currently ends up in an infinite loop?
+
+Quick sort implementation is broken, but I can't quite see where it's gone wrong (seem like different implementations might have different array indexing?)
+
+# 2024-02-05
+Quicksort implementation is running into _a lot_ of array indexing problem. Actually, make that some _serious_ issues with why the array indexing is going out bounds for all my implementations of quicksort! Opportunity to learn how to use a debugger and analyse the algorithm/invariants etc.
