@@ -46,19 +46,19 @@ Definitely: set aside the code for a bit and come back to look at it from a diff
 Implemented singly linked list. But it's leaking memory like crazy. Exercise: uset tools to debug.
 
 
-# 2024-01-23 Tuesday
+# 2024-01-23 Tue
 
 Binary tree delete a node proving to be a bit tricky if you want do it by shuffling pointers around (I've spent 90 mins on this thing and I don't think it's 100% sunk in)
 - New algo seems to _preserve_ traversal order but can you _prove_ it does?
 - issue of deleting root
 
-# 2024-01-28 Sunday
+# 2024-01-28 Sun
 Still not sure about delete algorithm when you have two children. It's not _obviously_ correct in some ways.
 
 We're just going to move on to hashtables and come back to this later.
 
 
-# 2024-01-29 Monday
+# 2024-01-29 Mon
 Leetcode is down.
 
 This morning:
@@ -68,14 +68,14 @@ This morning:
 To do: take a break, then figureout how to use python debugger to debug my crappy hashtable.
 - Debugging wasn't too hard
 
-# 2024-01-30 Tuesday
+# 2024-01-30 Tue
 Prototyped hash table with resizing, universal hashing and
 - The point of having a large prime is to try to spread the elements out.
 
 Need to think about theoretical considerations when it came to design. The more you look into it, the more subtleties there actually are to consider
 
 
-# 2024-01-31 Wednesday
+# 2024-01-31 Wed
 I'm tired of doing trees, so I'm just going to move on to heaps and come back to self balancing binary trees later.
 
 PQ needed a better understanding of sorts, so moved on to implementing quadratic sorts
@@ -84,3 +84,9 @@ Correctness of quadratic sorts
 - insertion, selection sort - correctness is clear because each round maintains `A[:i]` as a sorted prefix
 - bubblesort - not quite so clear why it's correct (Is is correct because each suffix `A[n-i-1:]` array is sorted? idea is we bubble max up to `A[n-i-1]`?)
 - Shellsort - give up for today, I can't recall why it worked.
+
+# 2024-02-01 Thu
+
+Implemented shell sort.
+- "preprocessing" with gap in a gap sequence
+- When gap = 1, we end up with insertion sort which we _know_ is correct.
