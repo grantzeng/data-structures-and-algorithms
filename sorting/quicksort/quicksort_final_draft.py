@@ -6,11 +6,17 @@
 
 def partition(A, lo, hi):
     """
+        Lomuto partitioning scheme
         CLRS strategy
         - due to Lomuto
         - Easier to understand. but slower to implement
 
         Assume hi is NOT INCLUSIVE!
+
+        The inclusive array index version of things forces i = lo - 1, which isn't a valid index, I'd
+        prefer i was always a valid index'
+
+        The strategy here is to "find where to put the pivot"
     """
 
     pivot = A[hi - 1]  # Pick pivot as last element of array
@@ -34,21 +40,22 @@ def hoare_partition(A, lo, hi):
 
         - It's less obviously correct (i.e. can you tell by inspection you won't accidentally make things out of bounds?)
     """
+
     pivot = A[lo]
-    left, right = lo + 1, hi # inclusive
-
+    # left and right index (this is basically a two pointer strategy; anyhow force them to be valid indicies)
+    # - I dislike the inclusive indexing strategy because you end up with invalid array indices for Python
+    left, right = lo + 1, hi - 1
     while True:
-        while left < right and A[right] >= pivot:
-            right -= 1
+        # This is correct because right is initted at hi - 1 which is a valid index and lower bounded by left which is a valid index (so right is always valid)
+        while right >= left and A[right] >= pivot:  right -= 1
+        # Symmetric argument to above as to why left will always be a valid index
+        while left <= right and A[left] <= pivot:   left += 1
 
-        while left < right and A[left] <= pivot:
-            left += 1
+        if left > right: break
 
-        if left <= right:
-            # Two elements on the wrong side: swap with each other
-            A[left], A[right] = A[right], A[left]
-        else:
-            break
+        # Two elements on the wrong side: swap with each other
+        A[left], A[right] = A[right], A[left]
+
 
     # Put pivot in its pivot position
     A[lo], A[right] = A[right], A[lo]
@@ -58,8 +65,8 @@ def hoare_partition(A, lo, hi):
 
 def quicksort(A, lo, hi):
     if lo < hi:
-        pivot = partition(A, lo, hi)
-        # pivot = hoare_partition(A, lo, hi)
+        #pivot = partition(A, lo, hi)
+        pivot = hoare_partition(A, lo, hi)
         quicksort(A, lo, pivot)
         quicksort(A, pivot + 1, hi)
 

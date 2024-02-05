@@ -103,7 +103,9 @@ Implementing (naive) quicksort (pivot is "pick left element of subarray")
 
 Quick sort implementation is broken, but I can't quite see where it's gone wrong (seem like different implementations might have different array indexing?)
 
-# 2024-02-05
+# 2024-02-05 Mon
 Quicksort implementation is running into _a lot_ of array indexing problem. Actually, make that some _serious_ issues with why the array indexing is going out bounds for all my implementations of quicksort! Opportunity to learn how to use a debugger and analyse the algorithm/invariants etc.
 
-Can't figure out why my implementations of partitioning weren't working, just have to come back to it later.
+Can't figure outwhy my implementations of partitioning weren't working, just have to come back to it later.
+### After lunch around 3:21pm
+Came back, fixed the Lomuto and Hoare partitioning schemes (issue was informally reasoning about invarinant of indicies being valid). Reimplement this tomorrow, and then implement it with inclusive indexing in function calls
