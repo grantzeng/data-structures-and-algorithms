@@ -42,8 +42,8 @@ def main():
     random.seed(0)
     arr = [ random.randint(0, 100) for _ in range(100) ]
 
-    print(quicksort(arr))
-    print(sorted(arr))
+    #print(quicksort(arr))
+    #print(sorted(arr))
 
     assert (quicksort(arr) == sorted(arr))
 

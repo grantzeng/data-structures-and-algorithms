@@ -26,7 +26,7 @@ def quicksort(A, left, right):
     if index < right:
         quicksort(A, index, right)
 
-
+    return A
 
 
 def main():

@@ -51,7 +51,7 @@ def partition(A, lo, hi):
 
         # Swap the elements (so they are on "the right side of the array")
         A[l], A[r] = A[r], A[l]
-        print(A)
+        #print(A)
 
     # Pivot goes to right of lo side
     # - only condition we want is "everything to left of pivot is less than it", and no other order constraints (hence no need to
@@ -81,14 +81,14 @@ def main():
     random.seed(0)
     # Simple debugging tests
     arr = [ random.randint(1, 1000) for _ in range(100) ]
-    print(naive_quicksort(arr, 0, len(arr) - 1))
+    # print(naive_quicksort(arr, 0, len(arr) - 1))
     assert(naive_quicksort(arr, 0, len(arr) - 1) == sorted(arr))
 
     # arr = []
     # print(naive_quicksort(arr, 0, 0))
 
-    arr = [1]
-    print(naive_quicksort(arr, 0, 1))
+    #arr = [1]
+    #print(naive_quicksort(arr, 0, 1))
 
 
 if __name__ == '__main__':
