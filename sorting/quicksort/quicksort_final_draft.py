@@ -8,13 +8,15 @@ def partition(A, lo, hi):
     """
         CLRS strategy
         - due to Lomuto
-        - Easier to understand. but slowe
+        - Easier to understand. but slower to implement
+
+        Assume hi is NOT INCLUSIVE!
     """
 
     pivot = A[hi - 1]  # Pick pivot as last element of array
-    i = lo # Candidate position to put the pivot at
+    i = lo # Init possible position to put i: put it on the far left
 
-    for j in range(lo, hi - 1):
+    for j in range(lo, hi - 1): # Check all possible positions to put pivot (i.e. everything except last element)
         if A[j] <= pivot: # Found an element smaller, so swap it with where pivot would be
             A[i], A[j] = A[j], A[i]
             i += 1
@@ -36,10 +38,10 @@ def hoare_partition(A, lo, hi):
     left, right = lo + 1, hi # inclusive
 
     while True:
-        while left <= right and A[right] >= pivot:
+        while left < right and A[right] >= pivot:
             right -= 1
 
-        while left <= right and A[left] <= pivot:
+        while left < right and A[left] <= pivot:
             left += 1
 
         if left <= right:
@@ -58,7 +60,7 @@ def quicksort(A, lo, hi):
     if lo < hi:
         pivot = partition(A, lo, hi)
         # pivot = hoare_partition(A, lo, hi)
-        quicksort(A, pivot, lo)
+        quicksort(A, lo, pivot)
         quicksort(A, pivot + 1, hi)
 
     return A

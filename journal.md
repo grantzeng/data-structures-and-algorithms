@@ -105,3 +105,5 @@ Quick sort implementation is broken, but I can't quite see where it's gone wrong
 
 # 2024-02-05
 Quicksort implementation is running into _a lot_ of array indexing problem. Actually, make that some _serious_ issues with why the array indexing is going out bounds for all my implementations of quicksort! Opportunity to learn how to use a debugger and analyse the algorithm/invariants etc.
+
+Can't figure out why my implementations of partitioning weren't working, just have to come back to it later.
