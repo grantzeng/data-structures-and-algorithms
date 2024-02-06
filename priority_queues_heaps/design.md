@@ -21,3 +21,11 @@ I'm not entirely sure what's going on, so going to type up all the code in Recit
 
 
 > INTERRUPT: Going to implement sorts first before I come back to this, because this depends on knowing them (2024-01-31)
+
+
+# Priority queues reconsidered (2024-02-06)
+
+> https://cgi.cse.unsw.edu.au/~cs2521/23T3/lectures/slides/week09mon-priority-queues.pdf
+Basically the naive data structures (arrays, linkedlists and their ordered versions), you trade off O(1) insert for O(n) delete max or vice versa
+
+Better idea is we can _store_ a binary tree in an array as its level order traversal. This avoid having to literally have a tree. I.e. implement pq with a binary heap

@@ -109,3 +109,16 @@ Quicksort implementation is running into _a lot_ of array indexing problem. Actu
 Can't figure outwhy my implementations of partitioning weren't working, just have to come back to it later.
 ### After lunch around 3:21pm
 Came back, fixed the Lomuto and Hoare partitioning schemes (issue was informally reasoning about invarinant of indicies being valid). Reimplement this tomorrow, and then implement it with inclusive indexing in function calls
+
+
+# 2024-02-06 Tue
+Plan for today:
+- ~~debugging quicksorts~~
+- Implement priority queue/heap
+- Implement an AVL tree
+- Pick one Grind 75 question to do, and do it
+
+All my quicksorts are still broken (need to understand/debug the array indexing problems)
+- We'll come back to this, along with radix sort, later.
+
+Array binary heap implementation is _mostly_ done but I'm not 100% grokking the max heapify down algorithm -- come back it tomorrow with a fresh mind
