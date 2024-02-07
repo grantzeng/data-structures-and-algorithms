@@ -122,3 +122,7 @@ All my quicksorts are still broken (need to understand/debug the array indexing 
 - We'll come back to this, along with radix sort, later.
 
 Array binary heap implementation is _mostly_ done but I'm not 100% grokking the max heapify down algorithm -- come back it tomorrow with a fresh mind
+
+
+# 2024-02-07 Wed
+Finish implementation of binary heap priority queue `max_heapify_down`
