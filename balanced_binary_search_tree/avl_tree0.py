@@ -1,5 +1,11 @@
+
 """
-    Idea: 
+    Broken implementation
+
+"""
+
+"""
+    Idea:
     - Most operations for a binary search tree we can get to be O(h)
         e.g. find (binary search is logn), insert, delete, findmin,find max find prev, find x
 
@@ -76,10 +82,10 @@ class BSTNode:
         #
         pass
 
-
 class BSTree:
     def __init__(self):
         self.root = None
+        self.size = 0
 
     def build(self, X):
         pass
@@ -87,8 +93,20 @@ class BSTree:
     def find(self, x):
         pass
 
-    def insert(self, x):
-        pass
+    def insert(self, i, x):
+        new_node = BSTNode(x)
+        if i == 0:
+            if self.root:
+                node = self.root.subtree_first()
+                node.subtree_insert_before(new_node)
+            else:
+                self.root = new_node
+        else:
+            node = self.root.subtree_at(i-1)
+            node.subtree_insert_after(new_node)
+
+        self.size += 1
+
 
 
     def delete(self, x):
@@ -127,6 +145,7 @@ class AVLNode(BSTNode):
             print('Nothing to rotate')
             return
 
+        print('To implement')
 
 
 
@@ -141,12 +160,22 @@ class AVLNode(BSTNode):
 
         # Just give names to all the things to make traversal order obvious
         # - Draw the diagram out!
+        # - Trying to rotate x into y's position and not screw up parent pointers
         A, x, B, y, C = self.left.left, self.left, self.left.right, self, self.right
 
-
+        # Fix y's parents first to point to x, and x to point to y's old parent
+        if y.parent:
+            if y.parent.left is y: y.parent.left = x
+            else:                  y.parent.right = x
+        x.parent = y.parent
         x.right, y.left = y, B
+        y.parent = x
 
-        # How to fix parent pointers?
+        if B:
+            B.parent = x
+
+
+
 
     def rebalance(self):
         # Also updates all the heights
@@ -163,5 +192,24 @@ class AVLTree(BSTree):
         pass
 
 
+def display(root, level=0):
+    """ Recursively display parent """
+    if not root: return
 
+    print('--'.repeat(level), f'{root.val}(p: {root.parent.val if root.parent else "NULL"})')
+
+    display(root.left, level + 1)
+    display(root.right, level + 1)
+
+def main():
+    print('Rotation test')
+
+    tree = BSTree()
+    for x in range(6):
+        tree.insert(0, x)
+    display(tree.root)
+
+
+if __name__ == '__main__':
+    main()
 
