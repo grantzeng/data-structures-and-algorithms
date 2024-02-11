@@ -10,13 +10,13 @@ Data structures:
     - Key data structures topics:
         - set vs. sequence interface, ADTs etc.
             - stacks, queues, dicts as restricted versions
-        - linked list
-        - dynamic array
-        - binary search tree
-        - hash table
-        - _interlude_: sorting algorithms
-        - self-balancing binary search trees
-        - heap/priority queue
+        - ~~linked list~~
+        - ~~dynamic array~~
+        - ~~binary search tree~~
+        - ~~hash table~~
+        - _interlude_: ~~sorting algorithms~`
+        - self-balancing binary search trees --> AVLtree
+        - ~~heap/priority queue~~
         - tries
 - Go back and look at the formal analysis of performance
 - Graph representations
